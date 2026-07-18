@@ -1,0 +1,62 @@
+/* Glyph theme — personal tweaks on top of Obsidian's default theme */
+
+body {
+  /* matches reading view: the line after a heading gets a real gap instead of being zeroed */
+  --p-spacing-empty: var(--p-spacing);
+}
+
+/* Live Preview block-to-block spacing parity: reading view gets its gaps from margin
+   collapsing, Live Preview has no margins between .cm-line elements, so entering/exiting
+   each block type needs an explicit padding-top boundary fix below. */
+
+/* Entering/exiting a list */
+.cm-s-obsidian .cm-line:not(.HyperMD-list-line):not(:has(>br:only-child)) + .cm-line.HyperMD-list-line {
+  padding-top: var(--p-spacing);
+}
+.cm-s-obsidian .cm-line.HyperMD-list-line + .cm-line:not(.HyperMD-list-line):not(.HyperMD-header):not(:has(>br:only-child)) {
+  padding-top: var(--p-spacing);
+}
+
+/* Entering/exiting a blockquote */
+.cm-s-obsidian .cm-line:not(.HyperMD-quote):not(:has(>br:only-child)) + .cm-line.HyperMD-quote {
+  padding-top: var(--p-spacing);
+}
+.cm-s-obsidian .cm-line.HyperMD-quote + .cm-line:not(.HyperMD-quote):not(.HyperMD-header):not(:has(>br:only-child)) {
+  padding-top: var(--p-spacing);
+}
+
+/* Entering/exiting a table */
+.cm-s-obsidian .cm-line:not(.HyperMD-table-row):not(:has(>br:only-child)) + .cm-line.HyperMD-table-row {
+  padding-top: var(--p-spacing);
+}
+.cm-s-obsidian .cm-line.HyperMD-table-row + .cm-line:not(.HyperMD-table-row):not(.HyperMD-header):not(:has(>br:only-child)) {
+  padding-top: var(--p-spacing);
+}
+
+/* Entering/exiting a code block (fence line only, not every line inside it) */
+.cm-s-obsidian .cm-line:not(.HyperMD-codeblock):not(:has(>br:only-child)) + .cm-line.HyperMD-codeblock-begin {
+  padding-top: var(--p-spacing);
+}
+.cm-s-obsidian .cm-line.HyperMD-codeblock-end + .cm-line:not(.HyperMD-codeblock):not(.HyperMD-header):not(:has(>br:only-child)) {
+  padding-top: var(--p-spacing);
+}
+
+/* Heading gets the larger --heading-spacing gap, but not after a blockquote — matches
+   reading view's own p/pre/table/ul/ol whitelist, which excludes blockquote */
+.cm-s-obsidian .cm-line:not(.HyperMD-list-line):not(.HyperMD-quote):not(.HyperMD-table-row):not(.HyperMD-codeblock):not(.HyperMD-header):not(:has(>br:only-child)) + .cm-line.HyperMD-header,
+.cm-s-obsidian .cm-line.HyperMD-list-line + .cm-line.HyperMD-header,
+.cm-s-obsidian .cm-line.HyperMD-table-row + .cm-line.HyperMD-header,
+.cm-s-obsidian .cm-line.HyperMD-codeblock-end + .cm-line.HyperMD-header {
+  padding-top: var(--heading-spacing);
+}
+
+/* Title → first content line: Live Preview's first .cm-line has no padding-top by default */
+.markdown-source-view.mod-cm6 .cm-content > .cm-line:first-child:not(.HyperMD-header) {
+  padding-top: var(--p-spacing);
+}
+
+.theme-dark {
+}
+
+.theme-light {
+}
