@@ -1,0 +1,18 @@
+General Sans — Indian Type Foundry, distributed via Fontshare
+https://www.fontshare.com/fonts/general-sans
+
+The following is extracted verbatim from the font files' own metadata
+(the 'name' table copyright, license description, and license URL records):
+
+Copyright 2017-2021 Indian Type Foundry. All rights reserved.
+
+This Font Software is protected under domestic and international
+trademark and copyright law. You agree to identify the ITF fonts by name
+and credit the ITF's ownership of the trademarks and copyrights in any
+design or production credits.
+
+License URL (per font metadata): https://fontshare.com/terms
+
+Note: fontshare.com/terms is a JavaScript-rendered page that could not be
+retrieved as plain text at the time this file was written — the text
+above is what the font files themselves declare, not a copy of that page.
