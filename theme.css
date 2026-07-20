@@ -21,6 +21,7 @@ body {
 
   /* body text in General Sans Regular, headings in General Sans Semibold */
   --font-text: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-interface: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --h1-font: 'General Sans';
   --h2-font: 'General Sans';
   --h3-font: 'General Sans';
@@ -86,6 +87,49 @@ body {
 /* Title → first content line: Live Preview's first .cm-line has no padding-top by default */
 .markdown-source-view.mod-cm6 .cm-content > .cm-line:first-child:not(.HyperMD-header) {
   padding-top: var(--p-spacing);
+}
+
+/* Links render as pill-shaped chips (reusing Obsidian's own tag-pill variables)
+   instead of the default underline, in both reading view and Live Preview */
+body {
+  --link-decoration: none;
+  --link-decoration-hover: none;
+  --link-external-decoration: none;
+  --link-external-decoration-hover: none;
+}
+
+.markdown-preview-view a,
+.markdown-rendered a {
+  background-color: var(--tag-background);
+  border-radius: var(--tag-radius);
+  /* inline padding doesn't grow the line box, so keep the vertical component
+     small — anything close to --tag-padding-y bleeds into the line above/below */
+  padding: 0.05em var(--tag-padding-x);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+@media (hover: hover) {
+  .markdown-preview-view a:hover,
+  .markdown-rendered a:hover {
+    background-color: var(--tag-background-hover);
+  }
+}
+
+.markdown-source-view.mod-cm6 .cm-hmd-internal-link .cm-underline,
+.markdown-source-view.mod-cm6 .cm-link .cm-underline,
+.markdown-source-view.mod-cm6 .cm-url .cm-underline {
+  background-color: var(--tag-background);
+  border-radius: var(--tag-radius);
+  padding: 0.05em var(--tag-padding-x);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+@media (hover: hover) {
+  .markdown-source-view.mod-cm6 .cm-hmd-internal-link .cm-underline:hover,
+  .markdown-source-view.mod-cm6 .cm-link .cm-underline:hover,
+  .markdown-source-view.mod-cm6 .cm-url .cm-underline:hover {
+    background-color: var(--tag-background-hover);
+  }
 }
 
 .theme-dark {
