@@ -16,6 +16,12 @@
 }
 
 body {
+  /* emerald (#1E7A5F) instead of Obsidian's default purple — everything else
+     (hover shade, tag backgrounds, checkboxes, selection color) derives from these */
+  --accent-h: 162;
+  --accent-s: 61%;
+  --accent-l: 30%;
+
   /* matches reading view: the line after a heading gets a real gap instead of being zeroed */
   --p-spacing-empty: var(--p-spacing);
 
@@ -132,7 +138,25 @@ body {
   }
 }
 
+/* Top-level (root) folders in the file explorer stand out via accent-colored text,
+   not a background fill. */
+.nav-files-container > div > .nav-folder > .nav-folder-title .nav-folder-title-content {
+  color: var(--text-accent);
+  font-weight: 400;
+}
+.nav-files-container > div > .nav-folder > .nav-folder-title .collapse-icon svg.svg-icon {
+  color: var(--text-accent);
+}
+
 .theme-dark {
+  /* darker than Obsidian's default #262626 — pushes the sidebar closer to black so
+     the accent color reads as a clean pop instead of clashing with a
+     neutral-gray backdrop. -alt matched to the same value (rather than kept
+     proportionally lighter) so the titlebar/tab-bar — which switches to
+     --background-secondary-alt when the window is focused — doesn't show a
+     third, still-old-looking shade next to the sidebar. */
+  --background-secondary: #191919;
+  --background-secondary-alt: #191919;
 }
 
 .theme-light {
