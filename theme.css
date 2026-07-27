@@ -144,8 +144,51 @@ body {
   color: var(--text-accent);
   font-weight: 400;
 }
+/* Root folders get a custom collapse icon: a single diamond when collapsed (bud),
+   the full four-diamond cluster (Lucide's "component" icon) when expanded (bloom) —
+   Obsidian only lets a theme recolor its own SVG, not replace the shape, so the
+   native icon is hidden and a mask-image pseudo-element stands in for it instead.
+
+   The stand-in goes on ::after, not ::before: Obsidian puts a zero-width space in
+   .collapse-icon::before, and that invisible character is the only thing giving the
+   icon box a text baseline. The row itself is `align-items: baseline`, so overwriting
+   that pseudo-element leaves the box with nothing to align against and the icon rides
+   up above the folder name. Leaving ::before alone keeps the icon sitting exactly
+   where the native chevron did. */
+.nav-files-container > div > .nav-folder > .nav-folder-title .collapse-icon {
+  /* four diamonds — expanded */
+  --glyph-root-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Crect x='14.825' y='9.525' width='4.95' height='4.95' rx='0.6' transform='rotate(45 17.3 12)'/%3E%3Crect x='4.225' y='9.525' width='4.95' height='4.95' rx='0.6' transform='rotate(45 6.7 12)'/%3E%3Crect x='9.525' y='14.825' width='4.95' height='4.95' rx='0.6' transform='rotate(45 12 17.3)'/%3E%3Crect x='9.525' y='4.225' width='4.95' height='4.95' rx='0.6' transform='rotate(45 12 6.7)'/%3E%3C/svg%3E");
+}
+.nav-files-container > div > .nav-folder > .nav-folder-title .collapse-icon.is-collapsed {
+  /* one diamond — collapsed. Same corner-rounding ratio as one diamond of the
+     cluster (radius ≈ 12% of the square's side) so the two states look like one family. */
+  --glyph-root-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='6.87' y='6.87' width='10.25' height='10.25' rx='1.25' transform='rotate(45 12 12)' fill='black'/%3E%3C/svg%3E");
+}
 .nav-files-container > div > .nav-folder > .nav-folder-title .collapse-icon svg.svg-icon {
-  color: var(--text-accent);
+  display: none;
+}
+.nav-files-container > div > .nav-folder > .nav-folder-title .collapse-icon::after {
+  content: '';
+  /* Drawn at 16px but only 10px of it counts for layout, so the folder name stays on
+     the same left edge as every other row while the icon itself gets room to read —
+     four diamonds at the chevron's 10px would be four specks. The negative margins are
+     equal on both sides, which keeps the icon's centre where the chevron's was. */
+  width: 16px;
+  height: 16px;
+  margin: 0 -3px;
+  /* the cluster's optical centre sits a touch above its bounding box centre, so nudge
+     it back down against the folder name — transform, not margin, to leave layout alone */
+  transform: translateY(0.5px);
+  flex: 0 0 auto;
+  background-color: var(--text-accent);
+  -webkit-mask-image: var(--glyph-root-icon);
+  mask-image: var(--glyph-root-icon);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 .theme-dark {
